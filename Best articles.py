@@ -13,9 +13,12 @@ for submission_id in submission_ids[:30]:
            str(submission_id) + '.json')
     submission_r = requests.get(url)
     response_dict = submission_r.json()
-    submission_dict = {'title': response_dict['title'],
-                       'xlink': response_dict['url'],
+    try:
+        submission_dict = {'title': response_dict['title'],
+                       'xlink': url,
                        'value': response_dict.get('descendants', 0)}
+    except:
+        pass
     names.append(submission_dict['title'])
     submission_dicts.append(submission_dict)
 
